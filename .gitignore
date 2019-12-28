@@ -284,5 +284,9 @@ src/**/inf.yaml
 # (CJO) Added
 appsettings.Local.json
 publisher_api/obj/*
-worker_api/obj/*
-
+worker/obj/*
+worker/obj/*
+worker/bin/*
+publisher_api/bin/*
+publisher_api/obj/*
+.vs/*
