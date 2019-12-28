@@ -1,4 +1,4 @@
-# Tutorial followed to learn MicroServices  
+# Tutorial followed to learn Microservices with Docker, .NET Core and RabbitMQ
 I followed this tutorial to help me learn the basics of Microservices with RabbitMQ, .NET Core and Docker. The tutorial was in .NET Core 2.2 however with a few small changes it was able to work for .NET Core 3.0 as well.
 
 ## Solution creation and project setup  
