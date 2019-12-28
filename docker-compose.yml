@@ -1,0 +1,34 @@
+version: '3.4'
+
+# This file is used to "orchestrate" each "Dockerfile" defined below. It runs multi-container applications.
+services:
+
+    publisher_api:
+        image: my_publisher_api:latest
+        build: ./publisher_api
+        restart: always
+
+    worker:
+        image: my_worker:latest
+        depends_on:
+            - "publisher_api"
+            - "rabbitmq"
+        build: ./worker
+        restart: always
+            
+
+    # Login guest:guest
+    rabbitmq:
+        image: rabbitmq:3-management
+        hostname: "rabbitmq"
+        labels:
+            NAME: "rabbitmq"
+
+        # Ports required for rabbitmq
+        ports:
+            - "4369:4369"
+            - "5671:5671"
+            - "5672:5672"
+            - "25672:25672"
+            - "15671:15671"
+            - "15672:15672"
