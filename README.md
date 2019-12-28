@@ -1,5 +1,14 @@
 # Tutorial followed to learn MicroServices  
-I followed this tutorial to help me learn the basics of Microservices with RabbitMQ, .NET Core and Docker. The tutorial was in .NET Core 2.2 however with a few small changes it was able to work for .NET Core 3.0 as well.
+I followed this tutorial to help me learn the basics of Microservices with RabbitMQ, .NET Core and Docker. I then went through adding a number of the features included in the eShopContainers repository to get the hang of how they're all implemented.
+
+## Additional enhancements
+I've added a few minor changes in order to test out other components of Microsoft's eShopContainer repo.
+- Upgraded to .NET Core 3.0
+- *Utilised Azure Key Vault*
+- *Implemented gRPC*
+- *Implemented Serilog and Seq*
+- *Swagger UI and Swashbuckle*
+- *Webhooks*
 
 ## Solution creation and project setup  
 Tutorial: https://medium.com/trimble-maps-engineering-blog/getting-started-with-net-core-docker-and-rabbitmq-part-1-a62601e784bb  
