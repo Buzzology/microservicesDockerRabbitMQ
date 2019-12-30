@@ -7,6 +7,8 @@ services:
         image: my_publisher_api:latest
         build: ./publisher_api
         restart: always
+        ports:
+            - "80:80"
 
     worker:
         image: my_worker:latest
