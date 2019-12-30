@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using publisher_api.Services;
+using Microsoft.OpenApi.Models;
 
 namespace publisher_api
 {
@@ -29,6 +30,10 @@ namespace publisher_api
             services
                 .AddControllers()
                 .AddNewtonsoftJson();
+
+            // Add swagger: https://github.com/domaindrivendev/Swashbuckle.AspNetCore
+            services
+                .AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" }));
 
             // Add DI services
             services.AddSingleton<IMessageService, MessageService>();
@@ -52,6 +57,11 @@ namespace publisher_api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            }); 
         }
     }
 }

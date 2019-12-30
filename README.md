@@ -5,7 +5,7 @@ I followed this tutorial to help me learn the basics of Microservices with Rabbi
 I've added a few minor changes in order to test out other components of Microsoft's eShopContainer repo.
 - Upgraded to .NET Core 3.0
 - Implemented Azure Key Vault
-- *Swagger UI and Swashbuckle*
+- Swagger UI using Swashbuckle
 - *Implemented gRPC*
 - *Implemented Serilog and Seq*
 - *Webhooks*
@@ -33,6 +33,8 @@ Docker-compose "orchestration" for containers. It allows you to run multi-contai
 - Build: docker build -t my_publisher_api .
 - Run single container: docker run my_publisher_api
 - Run multi-container: docker-compose up --build
+- View list of containers: docker container ls
+- Inspect container details: docker inspect CONTAINER_ID
 
 ### Additional info
 A default network is created for our application when using docker-compose to launch it. Each container is reachable by other containers and discoverable via a hostname identicaly to the container name. e.g. http://localhost:5001 becomes http://publisher_api:80.  
