@@ -37,6 +37,9 @@ namespace publisher_api
 
             // Add DI services
             services.AddSingleton<IMessageService, MessageService>();
+
+            // Add grpc
+            services.AddGrpc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +59,7 @@ namespace publisher_api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<WeatherService>();
             });
 
             app.UseSwagger();

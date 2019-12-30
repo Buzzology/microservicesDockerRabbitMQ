@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.11.2" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.11.2" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.26.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.26.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0" />
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.4" />
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.3.1" />
@@ -12,6 +19,11 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc5" />
+  </ItemGroup>
+
+  <!-- gRPC proto files -->
+  <ItemGroup>
+    <Protobuf Include="protos\Weather.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

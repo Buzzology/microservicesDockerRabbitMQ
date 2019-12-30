@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Grpc.Net.Client;
+using static gRPCTest.Weather;
+using gRPCTest;
 
 namespace worker
 {
@@ -78,6 +81,20 @@ namespace worker
                     Console.WriteLine("Server returned: " + resultContent);
                 }
             }
+        }
+
+
+        public static async Task gRPCTest(){
+
+            System.Console.WriteLine("Retrieving gRPC weather forecast info...");
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+
+            // Allow http: This switch must be set before creating the GrpcChannel/HttpClient. https://docs.microsoft.com/en-us/aspnet/core/grpc/troubleshoot?view=aspnetcore-3.1#call-insecure-grpc-services-with-net-core-client
+            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var client = new WeatherClient(channel);
+            var reply = await client.ForecastAsync(new WeatherForecastRequest());
+
+            Console.WriteLine($"Received a reply from gRPC weather forecase: {@reply}");
         }
     }
 }

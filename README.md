@@ -6,9 +6,11 @@ I've added a few minor changes in order to test out other components of Microsof
 - Upgraded to .NET Core 3.0
 - Implemented Azure Key Vault
 - Swagger UI using Swashbuckle
-- *Implemented gRPC*
+- Implemented gRPC
 - *Implemented Serilog and Seq*
 - *Webhooks*
+- *Service Fabric*
+- *GraphQL*
 
 ## Solution creation and project setup  
 Tutorial: https://medium.com/trimble-maps-engineering-blog/getting-started-with-net-core-docker-and-rabbitmq-part-1-a62601e784bb  
@@ -51,3 +53,22 @@ RabbitMQ is used for queueing service messages and decoupling them. Added as a n
 
 ### Additional info  
 View the RabbitMQ managment console by browsing to http://localhost:15672
+
+
+## Swagger setup  
+GitHub: https://github.com/domaindrivendev/Swashbuckle.AspNetCore  
+
+### Additional info  
+JSON feed: http://localhost/swagger/v1/swagger.json  
+UI: http://localhost/swagger/index.html  
+
+
+## gRPC Setup  
+Tutorial: https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-3.1&tabs=visual-studio-code  
+GitHub Reference: https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample  
+
+
+
+
+
+
