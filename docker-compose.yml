@@ -3,25 +3,6 @@ version: '3.4'
 # This file is used to "orchestrate" each "Dockerfile" defined below. It runs multi-container applications.
 services:
 
-    publisher_api:
-        image: my_publisher_api:latest
-        build: ./publisher_api
-        restart: always
-        ports:
-            - "80:80"
-            - "443:443"
-            - "5000:5000"
-            - "5001:5001"
-
-    worker:
-        image: my_worker:latest
-        depends_on:
-            - "publisher_api"
-            - "rabbitmq"
-        build: ./worker
-        restart: always
-            
-
     # Login guest:guest
     rabbitmq:
         image: rabbitmq:3-management
@@ -37,3 +18,35 @@ services:
             - "25672:25672"
             - "15671:15671"
             - "15672:15672"
+
+
+    # Seq added for logging UI: https://github.com/dotnet-architecture/eShopOnContainers/wiki/Serilog-and-Seq
+    seq:
+        hostname: "seq"
+        image: datalust/seq:latest
+        environment:
+            - ACCEPT_EULA=Y
+        ports:
+            - "5340:80"
+            - "5341:5341"
+
+
+    # Main web api test
+    publisher_api:
+        image: my_publisher_api:latest
+        build: ./publisher_api
+        restart: always
+        ports:
+            - "80:80"
+            - "443:443"
+            # - "5000:5000"
+            # - "5001:5001"
+
+
+    worker:
+        image: my_worker:latest
+        depends_on:
+            - "publisher_api"
+            - "rabbitmq"
+        build: ./worker
+        restart: always    

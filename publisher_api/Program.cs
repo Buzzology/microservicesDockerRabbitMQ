@@ -1,8 +1,12 @@
 
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 
 namespace publisher_api
 {
@@ -10,7 +14,23 @@ namespace publisher_api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+
+            CreateLogger();
+
+            try {
+                Log.Information("\r\n\r\n---------------------------------------------------------------------------------\r\n\r\n");
+                Log.Information("Starting publisher API...");
+                CreateHostBuilder(args).Build().Run();
+                Log.Information("Started publisher API!");
+                Log.Information("\r\n\r\n---------------------------------------------------------------------------------\r\n\r\n");
+            }
+            catch(Exception e)
+            {
+                Log.Fatal(e, "Host terminated unexpectedly");
+            }
+            finally {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -27,7 +47,9 @@ namespace publisher_api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                
+                .UseSerilog();
 
 
         private static void GetConfiguration(IConfigurationBuilder builder)
@@ -50,6 +72,20 @@ namespace publisher_api
             }
 
             builder.Build();
+        }
+
+
+        public static void CreateLogger()
+        {
+            var levelSwitch = new LoggingLevelSwitch();
+            
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.ControlledBy(levelSwitch)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.Seq("http://seq:5341", apiKey: "x79sgVcILv4AiUWQjKLv", controlLevelSwitch: levelSwitch)
+                .CreateLogger();
         }
     }
 }

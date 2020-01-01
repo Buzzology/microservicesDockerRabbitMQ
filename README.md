@@ -7,10 +7,10 @@ I've added a few minor changes in order to test out other components of Microsof
 - Implemented Azure Key Vault
 - Swagger UI using Swashbuckle
 - Implemented gRPC
-- *Implemented Serilog and Seq*
+- Implemented Serilog and Seq
 - *Webhooks*
-- *Service Fabric*
 - *GraphQL*
+- *Service Fabric*
 
 ## Solution creation and project setup  
 Tutorial: https://medium.com/trimble-maps-engineering-blog/getting-started-with-net-core-docker-and-rabbitmq-part-1-a62601e784bb  
@@ -66,6 +66,15 @@ UI: http://localhost/swagger/index.html
 ## gRPC Setup  
 Tutorial: https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-3.1&tabs=visual-studio-code  
 GitHub Reference: https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample  
+
+
+# Serilog with Seq setup
+Github: https://github.com/serilog/serilog-aspnetcore
+Docker setup for Seq: https://github.com/dotnet-architecture/eShopOnContainers/wiki/Serilog-and-Seq
+
+### Additional info
+UI: http://localhost:5340/#/events
+Internal Logging Target: http://seq:5341
 
 
 
