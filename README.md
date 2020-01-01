@@ -1,8 +1,13 @@
 # Tutorial followed to learn Microservices with Docker, .NET Core and RabbitMQ
 I followed this tutorial to help me learn the basics of Microservices with RabbitMQ, .NET Core and Docker. I then went through adding a number of the features included in the eShopContainers repository to get the hang of how they're all implemented.
 
-## Additional enhancements
-I've added a few minor changes in order to test out other components of Microsoft's eShopContainer repo.
+## Tutorial and project setup  
+Tutorial: https://medium.com/trimble-maps-engineering-blog/getting-started-with-net-core-docker-and-rabbitmq-part-1-a62601e784bb  
+GitHub: https://github.com/matthew-harper/dotnet-docker-rabbitmq-tutorial 
+
+
+## Additional custom enhancements  
+I've added a few minor changes of my own in order to test out other components that I'd seen Microsoft's eShopContainer repo.
 - Upgraded to .NET Core 3.0
 - Implemented Azure Key Vault
 - Swagger UI using Swashbuckle
@@ -12,9 +17,6 @@ I've added a few minor changes in order to test out other components of Microsof
 - *GraphQL*
 - *Service Fabric*
 
-## Solution creation and project setup  
-Tutorial: https://medium.com/trimble-maps-engineering-blog/getting-started-with-net-core-docker-and-rabbitmq-part-1-a62601e784bb  
-GitHub: https://github.com/matthew-harper/dotnet-docker-rabbitmq-tutorial  
 
 ### Commands
 - Create new project: dotnet new webApi -o "publisher_api"
