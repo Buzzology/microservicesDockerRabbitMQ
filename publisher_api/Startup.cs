@@ -30,6 +30,7 @@ namespace publisher_api
         {
             services
                 .AddControllers()
+                .AddGitHubWebHooks()
                 .AddNewtonsoftJson();
 
             // Add swagger: https://github.com/domaindrivendev/Swashbuckle.AspNetCore

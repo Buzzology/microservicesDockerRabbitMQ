@@ -13,7 +13,7 @@ I've added a few minor changes of my own in order to test out other components t
 - Swagger UI using Swashbuckle
 - Implemented gRPC
 - Implemented Serilog and Seq
-- *Webhooks*
+- Webhooks
 - *GraphQL*
 - *Service Fabric*
 - *Health checks*
