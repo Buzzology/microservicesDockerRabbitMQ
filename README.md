@@ -16,6 +16,7 @@ I've added a few minor changes of my own in order to test out other components t
 - *Webhooks*
 - *GraphQL*
 - *Service Fabric*
+- *Health checks*
 
 
 ### Commands
@@ -70,13 +71,20 @@ Tutorial: https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start
 GitHub Reference: https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample  
 
 
-# Serilog with Seq setup
+## Serilog with Seq setup
 Github: https://github.com/serilog/serilog-aspnetcore
 Docker setup for Seq: https://github.com/dotnet-architecture/eShopOnContainers/wiki/Serilog-and-Seq
 
 ### Additional info
 UI: http://localhost:5340/#/events
 Internal Logging Target: http://seq:5341
+
+
+# Webhooks  
+Tutorial: https://medium.com/@nelson.souza/net-core-webhooks-7a51e113f9f6
+ngrok: https://dashboard.ngrok.com/get-started
+
+
 
 
 
