@@ -14,9 +14,10 @@ I've added a few minor changes of my own in order to test out other components t
 - Implemented gRPC
 - Implemented Serilog and Seq
 - Webhooks
+- Health checks
+- *Retry service*
 - *GraphQL*
-- *Service Fabric*
-- *Health checks*
+
 
 
 ### Commands
@@ -40,6 +41,7 @@ Docker-compose "orchestration" for containers. It allows you to run multi-contai
 - Run multi-container: docker-compose up --build
 - View list of containers: docker container ls
 - Inspect container details: docker inspect CONTAINER_ID
+- Stop a single microservice after starting with docker-compose: docker stop {instance-id}
 
 ### Additional info
 A default network is created for our application when using docker-compose to launch it. Each container is reachable by other containers and discoverable via a hostname identicaly to the container name. e.g. http://localhost:5001 becomes http://publisher_api:80.  
@@ -84,6 +86,18 @@ Internal Logging Target: http://seq:5341
 Tutorial: https://medium.com/@nelson.souza/net-core-webhooks-7a51e113f9f6
 ngrok: https://dashboard.ngrok.com/get-started
 
+App received a notification every time a change is made to the repository on Github. Requires ngrok to be running if hosting locally.
+
+
+# Healthchecks
+Github: https://github.com/dotnet-architecture/eShopOnContainers/wiki/Using-HealthChecks
+Doco: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/monitor-app-health
+
+Used to check liveness and health of services. If using in a real project would probably create as a separate microservice or use the provided docker file. The health checks ui observes each of the provided endpoints and provides a spa to display the result.
+
+## Additional info
+UI: http://localhost/healthchecks-ui
+Endpoint to check: http://localhost/hc
 
 
 

@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using publisher_api.Services;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using publisher_api.HealthChecks;
+using HealthChecks.UI.Client;
 
 namespace publisher_api
 {
@@ -40,8 +44,18 @@ namespace publisher_api
             // Add DI services
             services.AddSingleton<IMessageService, MessageService>();
 
-            // Add grpc
+            // Add misc services
             services.AddGrpc();
+            services.AddHealthChecks()
+                .AddCheck<RabbitMqHealthCheck>(
+                    "Rabbit MQ Health Check",
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: new[] { "ready" }
+                );
+            services.AddHealthChecksUI();
+
+            // Adding health checks as singleton services: https://stackoverflow.com/a/52029647/522859
+            services.AddSingleton<IHealthCheck, RabbitMqHealthCheck>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,9 +82,22 @@ namespace publisher_api
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });             
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/health");
+                endpoints.MapHealthChecksUI();
+            });
+
+            app.UseHealthChecks("/hc", new HealthCheckOptions {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+            app.UseHealthChecksUI();
         }
     }
 }

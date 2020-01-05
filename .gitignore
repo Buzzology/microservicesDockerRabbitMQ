@@ -297,3 +297,4 @@ publisher_api/obj/*
 .vs/ClassTests/DesignTimeBuild/.dtbcache
 .vs/ClassTests/v16/.suo
 .vs/ClassTests/v16/Server/sqlite3/storage.ide
+publisher_api/appsettings.Development.json
