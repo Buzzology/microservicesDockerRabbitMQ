@@ -66,13 +66,9 @@ namespace publisher_api
                 app.UseDeveloperExceptionPage();
             }
 
-            // Add serilog request logging - will only log endpoints that are generated after it. Can eliminate static files by adding above
             app.UseSerilogRequestLogging();
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

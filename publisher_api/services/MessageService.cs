@@ -1,15 +1,19 @@
 using System;
 using System.Text;
+using Polly;
 using RabbitMQ.Client;
 
-namespace publisher_api.Services {
+namespace publisher_api.Services
+{
 
     // define interface and service
-    public interface IMessageService {
+    public interface IMessageService
+    {
         bool Enqueue(string message);
     }
 
-    public class MessageService : IMessageService {
+    public class MessageService : IMessageService
+    {
         ConnectionFactory _factory;
         IConnection _conn;
         IModel _channel;
@@ -36,11 +40,20 @@ namespace publisher_api.Services {
         public bool Enqueue(string messageString)
         {
             var body = Encoding.UTF8.GetBytes("server processed " + messageString);
-            _channel.BasicPublish(
-                exchange: "",
-                routingKey: "hello",
-                basicProperties: null,
-                body: body
+
+            // Use polly to enable retries
+            var retry = Policy
+                .Handle<Exception>()
+                .WaitAndRetry(2, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+
+            // Publish the message to the queue
+            retry.Execute(() =>
+                _channel.BasicPublish(
+                    exchange: "",
+                    routingKey: "hello",
+                    basicProperties: null,
+                    body: body
+                )
             );
 
             System.Console.WriteLine(" [x] Published {0} to RabbitMQ", messageString);

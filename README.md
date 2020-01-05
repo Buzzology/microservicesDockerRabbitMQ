@@ -15,7 +15,7 @@ I've added a few minor changes of my own in order to test out other components t
 - Implemented Serilog and Seq
 - Webhooks
 - Health checks
-- *Retry service*
+- Retry using Polly
 - *GraphQL*
 
 
@@ -100,6 +100,11 @@ UI: http://localhost/healthchecks-ui
 Endpoint to check: http://localhost/hc
 
 
+# Polly
+Background Info (including service meshes): https://github.com/dotnet-architecture/eShopOnContainers/wiki/Resiliency-and-Service-Mesh
+Doco: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly
+
+Used to maximise availability and handle scenarios where retry logic may be required.
 
 
 
