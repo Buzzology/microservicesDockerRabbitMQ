@@ -4,20 +4,20 @@ version: '3.4'
 services:
 
     # Login guest:guest
-    rabbitmq:
-        image: rabbitmq:3-management
-        hostname: "rabbitmq"
-        labels:
-            NAME: "rabbitmq"
+    # rabbitmq:
+    #     image: rabbitmq:3-management
+    #     hostname: "rabbitmq"
+    #     labels:
+    #         NAME: "rabbitmq"
 
-        # Ports required for rabbitmq
-        ports:
-            - "4369:4369"
-            - "5671:5671"
-            - "5672:5672"
-            - "25672:25672"
-            - "15671:15671"
-            - "15672:15672"
+    #     # Ports required for rabbitmq
+    #     ports:
+    #         - "4369:4369"
+    #         - "5671:5671"
+    #         - "5672:5672"
+    #         - "25672:25672"
+    #         - "15671:15671"
+    #         - "15672:15672"
 
 
     # Seq added for logging UI: https://github.com/dotnet-architecture/eShopOnContainers/wiki/Serilog-and-Seq
@@ -32,21 +32,46 @@ services:
 
 
     # Main web api test
-    publisher_api:
-        image: my_publisher_api:latest
-        build: ./publisher_api
-        restart: always
+    # publisher_api:
+    #     image: my_publisher_api:latest
+    #     build: ./publisher_api
+    #     restart: always
+    #     ports:
+    #         - "80:80"
+    #         - "443:443"
+    #         # - "5000:5000"
+    #         # - "5001:5001"
+
+
+    # Test client for publisher api
+    # worker:
+    #     image: my_worker:latest
+    #     depends_on:
+    #         - "publisher_api"
+    #         - "rabbitmq"
+    #     build: ./worker
+    #     restart: always    
+
+
+    # Mongo db
+    mongo:
+        image: mongo
         ports:
-            - "80:80"
-            - "443:443"
+            - "27017:27017"
+        hostname: "mongo"
+        labels:
+            NAME: "mongodb"
+
+
+
+    # Test graphql client
+    hot-chocolate-dataloader:
+        image: hot-chocolate-dataloader:latest
+        build: ./hot-chocolate-dataloader
+        restart: always
+        depends_on:
+            - "mongo"
+        ports:
+            - "30005:30005"
             # - "5000:5000"
             # - "5001:5001"
-
-
-    worker:
-        image: my_worker:latest
-        depends_on:
-            - "publisher_api"
-            - "rabbitmq"
-        build: ./worker
-        restart: always    

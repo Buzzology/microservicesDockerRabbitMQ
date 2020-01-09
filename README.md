@@ -42,9 +42,14 @@ Docker-compose "orchestration" for containers. It allows you to run multi-contai
 - View list of containers: docker container ls
 - Inspect container details: docker inspect CONTAINER_ID
 - Stop a single microservice after starting with docker-compose: docker stop {instance-id}
+- View running containers: docker ps
+- Stop all running containers (powershell): docker stop $(docker ps -a -q)
+- Remove all containers (powershell): docker rm $(docker ps -a -q)
 
 ### Additional info
 A default network is created for our application when using docker-compose to launch it. Each container is reachable by other containers and discoverable via a hostname identicaly to the container name. e.g. http://localhost:5001 becomes http://publisher_api:80.  
+
+Dockerfile defines the image to create, docker compose defines the container.
 
 
 ## RabbitMQ setup
@@ -105,6 +110,29 @@ Background Info (including service meshes): https://github.com/dotnet-architectu
 Doco: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly
 
 Used to maximise availability and handle scenarios where retry logic may be required.
+
+
+# GraphQL
+Tutorial: https://hotchocolate.io/docs/tutorial-01-gettingstarted
+How to set it all up with ASP.NET Core: https://hotchocolate.io/docs/aspnet
+
+I'd heard that the RSPCA is using Hot Chocolate on Microservices with AWS for their newer projects so I'm trying it out.
+
+Added seq, added mongodb, added to docker-compose. 
+
+
+## Additional info
+Playground endpoint: http://localhost:5000/playground/
+Running locally: dotnet watch --project src/Server/ run
+Run mongodb locally: docker run --name mongo -p 27017:27017 -d mongo mongod
+
+Twitter Service Initial Tutorial: https://hotchocolate.io/docs/
+Data Loader Tutorial: https://hotchocolate.io/docs/dataloaders
+TODO: Add graphql logger https://chillicream.com/blog/2019/03/19/logging-with-hotchocolate
+
+
+
+
 
 
 
