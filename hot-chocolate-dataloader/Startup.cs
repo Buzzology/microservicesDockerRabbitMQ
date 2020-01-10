@@ -9,6 +9,7 @@ using HotChocolate.Utilities;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 using Serilog;
+using HotChocolate.Execution;
 
 namespace HotChocolate.Examples.Paging
 {
@@ -29,6 +30,7 @@ namespace HotChocolate.Examples.Paging
             services.AddSingleton<IMongoCollection<User>>(s => s.GetRequiredService<IMongoDatabase>().GetCollection<User>("users"));
             services.AddSingleton<MessageRepository>();
             services.AddSingleton<UserRepository>();
+            services.AddDiagnosticObserver<DiagnosticObserver>();
 
             // this enables you to use DataLoader in your resolvers.
             services.AddDataLoaderRegistry();
@@ -54,9 +56,6 @@ namespace HotChocolate.Examples.Paging
             app.UseSerilogRequestLogging();
             app.UseGraphQL();
             app.UsePlayground();
-
-            System.Console.WriteLine($"HERERERERERERERE2");
-            System.Console.WriteLine($"{JsonConvert.SerializeObject(env)}");
         }
     }
 }

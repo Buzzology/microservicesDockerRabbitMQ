@@ -16,7 +16,7 @@ I've added a few minor changes of my own in order to test out other components t
 - Webhooks
 - Health checks
 - Retry using Polly
-- *GraphQL*
+- GraphQL
 
 
 
@@ -128,7 +128,18 @@ Run mongodb locally: docker run --name mongo -p 27017:27017 -d mongo mongod
 
 Twitter Service Initial Tutorial: https://hotchocolate.io/docs/
 Data Loader Tutorial: https://hotchocolate.io/docs/dataloaders
-TODO: Add graphql logger https://chillicream.com/blog/2019/03/19/logging-with-hotchocolate
+Added graphql logger: https://chillicream.com/blog/2019/03/19/logging-with-hotchocolate
+Linked logger to SEQ sink.
+
+## Sample mutation
+mutation {
+  createUser(userInput:{
+    country: "Australia"
+    name: "tesT"
+  }) {
+    id
+  }
+}
 
 
 

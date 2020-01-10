@@ -4,20 +4,20 @@ version: '3.4'
 services:
 
     # Login guest:guest
-    # rabbitmq:
-    #     image: rabbitmq:3-management
-    #     hostname: "rabbitmq"
-    #     labels:
-    #         NAME: "rabbitmq"
+    rabbitmq:
+        image: rabbitmq:3-management
+        hostname: "rabbitmq"
+        labels:
+            NAME: "rabbitmq"
 
-    #     # Ports required for rabbitmq
-    #     ports:
-    #         - "4369:4369"
-    #         - "5671:5671"
-    #         - "5672:5672"
-    #         - "25672:25672"
-    #         - "15671:15671"
-    #         - "15672:15672"
+        # Ports required for rabbitmq
+        ports:
+            - "4369:4369"
+            - "5671:5671"
+            - "5672:5672"
+            - "25672:25672"
+            - "15671:15671"
+            - "15672:15672"
 
 
     # Seq added for logging UI: https://github.com/dotnet-architecture/eShopOnContainers/wiki/Serilog-and-Seq
@@ -32,25 +32,25 @@ services:
 
 
     # Main web api test
-    # publisher_api:
-    #     image: my_publisher_api:latest
-    #     build: ./publisher_api
-    #     restart: always
-    #     ports:
-    #         - "80:80"
-    #         - "443:443"
-    #         # - "5000:5000"
-    #         # - "5001:5001"
+    publisher_api:
+        image: my_publisher_api:latest
+        build: ./publisher_api
+        restart: always
+        ports:
+            - "80:80"
+            - "443:443"
+            # - "5000:5000"
+            # - "5001:5001"
 
 
     # Test client for publisher api
-    # worker:
-    #     image: my_worker:latest
-    #     depends_on:
-    #         - "publisher_api"
-    #         - "rabbitmq"
-    #     build: ./worker
-    #     restart: always    
+    worker:
+        image: my_worker:latest
+        depends_on:
+            - "publisher_api"
+            - "rabbitmq"
+        build: ./worker
+        restart: always    
 
 
     # Mongo db

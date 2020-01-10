@@ -39,4 +39,3 @@ src/Web/Catalog.WebForms/
 src/Web/WebMonolithic/
 src/BuildingBlocks/CommandBus/
 src/Services/Marketing/Infrastructure/
-**/.vs/*
